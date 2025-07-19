@@ -38,6 +38,10 @@
             line-height: 1.8;
             scroll-behavior: smooth;
         }
+        
+        body.nav-open {
+            overflow: hidden;
+        }
 
         .container {
             width: 90%;
@@ -74,6 +78,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-color);
+            z-index: 1001;
         }
 
         .main-nav ul {
@@ -94,6 +99,39 @@
             color: var(--primary-color);
             border-bottom-color: var(--primary-color);
         }
+        
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+        .hamburger {
+            display: block;
+            position: relative;
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger::before, .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        .hamburger::before { transform: translateY(-8px); }
+        .hamburger::after { transform: translateY(8px); }
+
+        .nav-open .hamburger { background: transparent; }
+        .nav-open .hamburger::before { transform: rotate(45deg); }
+        .nav-open .hamburger::after { transform: rotate(-45deg); }
         
         /* --- Dropdown Menu Styles --- */
         .nav-item.dropdown {
@@ -138,7 +176,6 @@
             font-size: 0.8em;
             margin-right: 5px;
         }
-        /* --- End Dropdown Menu Styles --- */
         
         .section-title {
             font-size: 2.2rem;
@@ -238,70 +275,6 @@
             padding: 4rem 0;
         }
         
-        /* --- Slideshow Styles --- */
-        .article-slider-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto 3rem auto;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .article-slider-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .article-slide {
-            min-width: 100%;
-            height: 400px;
-            position: relative;
-        }
-        .article-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .article-slide-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            color: white;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            text-align: right;
-        }
-        .article-slide-caption h3 {
-            font-size: 1.8rem;
-            margin: 0;
-        }
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.7);
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s;
-        }
-        .slider-nav:hover {
-            background-color: rgba(255, 255, 255, 1);
-        }
-        .slider-nav.prev {
-            left: 15px;
-        }
-        .slider-nav.next {
-            right: 15px;
-        }
-        /* --- End Slideshow Styles --- */
-
         .article-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -477,6 +450,30 @@
         }
         
         @media (max-width: 992px) {
+            .nav-toggle {
+                display: block;
+            }
+            .main-nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--surface-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.4s ease-in-out;
+            }
+            .main-nav ul.active {
+                right: 0;
+            }
+            .dropdown-menu {
+                display: none; /* Hide dropdown on mobile for simplicity */
+            }
             .hero-container, .about-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -489,13 +486,11 @@
                 margin-top: 2rem;
                 order: -1;
             }
-            .dropdown-menu { display: none; }
         }
 
         @media (max-width: 768px) {
-            .main-header .container { flex-direction: column; gap: 1rem; }
             .hero-content h1 { font-size: 2.2rem; }
-            .main-nav ul { display: none; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -503,11 +498,14 @@
     <header class="main-header">
         <div class="container">
             <a href="#" class="logo">دکتر سعادت اله روحانی</a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="hamburger"></span>
+            </button>
             <nav class="main-nav">
-                <ul>
+                <ul id="nav-menu">
                     <li class="nav-item"><a href="#home" class="active">خانه</a></li>
                     <li class="nav-item dropdown">
-                        <a href="./articals.html">مقالات</a>
+                        <a href="#articles">مقالات</a>
                         <div class="dropdown-menu">
                             <a href="#" class="dropdown-item">هیپنوتیزم درمانی</a>
                             <a href="#" class="dropdown-item">مشاوره خانواده</a>
@@ -542,35 +540,14 @@
 
         <section id="articles" class="articles-section">
             <div class="container">
-                <h2 class="section-title">مقالات پرطرفدار</h2>
-                
-                <div class="article-slider-container">
-                    <div class="article-slider-wrapper">
-                        <div class="article-slide">
-                            <img src="https://placehold.co/900x400/a2d2ff/34495e?text=Stress+Management" alt="مدیریت استرس">
-                            <div class="article-slide-caption"><h3>مدیریت استرس و اضطراب</h3></div>
-                        </div>
-                        <div class="article-slide">
-                            <img src="https://placehold.co/900x400/e5e9ec/34495e?text=Relationships" alt="روابط عاطفی">
-                            <div class="article-slide-caption"><h3>بهبود روابط عاطفی</h3></div>
-                        </div>
-                        <div class="article-slide">
-                            <img src="https://placehold.co/900x400/bde0fe/34495e?text=Hypnotherapy" alt="هیپنوتیزم درمانی">
-                            <div class="article-slide-caption"><h3>کاربردهای هیپنوتیزم درمانی</h3></div>
-                        </div>
-                    </div>
-                    <button class="slider-nav next">&lt;</button>
-                    <button class="slider-nav prev">&gt;</button>
-                </div>
-
-                <h2 class="section-title" style="margin-top: 4rem;">آخرین نوشته‌ها</h2>
+                <h2 class="section-title">آخرین نوشته‌ها</h2>
                 <div class="article-grid">
                     <article class="article-card">
                         <div class="card-image"><img src="https://placehold.co/600x400/a2d2ff/34495e?text=Stress+Management" alt="مدیریت استرس"></div>
                         <div class="card-content">
                             <h3 class="card-title">مدیریت استرس و اضطراب</h3>
                             <p class="card-excerpt">راهکارهای عملی برای شناسایی و مدیریت استرس‌های روزمره و رسیدن به آرامش پایدار.</p>
-                            <a href="./artical_page.html" class="card-link">ادامه مطلب &larr;</a>
+                            <a href="Article Page.html" class="card-link">ادامه مطلب &larr;</a>
                         </div>
                     </article>
                     <article class="article-card">
@@ -578,7 +555,7 @@
                         <div class="card-content">
                             <h3 class="card-title">بهبود روابط عاطفی</h3>
                             <p class="card-excerpt">نکات کلیدی برای ساختن یک رابطه سالم، پایدار و سرشار از درک متقابل.</p>
-                            <a href="./artical_page.html" class="card-link">ادامه مطلب &larr;</a>
+                            <a href="Article Page.html" class="card-link">ادامه مطلب &larr;</a>
                         </div>
                     </article>
                     <article class="article-card">
@@ -586,7 +563,7 @@
                         <div class="card-content">
                             <h3 class="card-title">کاربردهای هیپنوتیزم درمانی</h3>
                             <p class="card-excerpt">آشنایی با هیپنوتراپی و کاربردهای آن در درمان فوبیا، ترک عادات و افزایش اعتماد به نفس.</p>
-                            <a href="./artical_page.html" class="card-link">ادامه مطلب &larr;</a>
+                            <a href="Article Page.html" class="card-link">ادامه مطلب &larr;</a>
                         </div>
                     </article>
                 </div>
@@ -664,50 +641,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const sliderWrapper = document.querySelector('.article-slider-wrapper');
-            if (sliderWrapper) {
-                const slides = document.querySelectorAll('.article-slide');
-                const prevBtn = document.querySelector('.slider-nav.prev');
-                const nextBtn = document.querySelector('.slider-nav.next');
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('#nav-menu');
 
-                let currentIndex = 0;
-                const totalSlides = slides.length;
-                let autoPlayInterval;
-
-                function goToSlide(index) {
-                    if (index < 0) {
-                        index = totalSlides - 1;
-                    } else if (index >= totalSlides) {
-                        index = 0;
-                    }
-                    sliderWrapper.style.transform = `translateX(-${index * 100}%)`;
-                    currentIndex = index;
-                }
-
-                function startAutoPlay() {
-                    stopAutoPlay();
-                    autoPlayInterval = setInterval(() => {
-                        goToSlide(currentIndex + 1);
-                    }, 5000);
-                }
-
-                function stopAutoPlay() {
-                    clearInterval(autoPlayInterval);
-                }
-
-                prevBtn.addEventListener('click', () => {
-                    stopAutoPlay();
-                    goToSlide(currentIndex - 1);
-                    startAutoPlay();
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('nav-open');
                 });
 
-                nextBtn.addEventListener('click', () => {
-                    stopAutoPlay();
-                    goToSlide(currentIndex + 1);
-                    startAutoPlay();
+                // Close menu when a link is clicked
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navMenu.classList.contains('active')) {
+                            navMenu.classList.remove('active');
+                            document.body.classList.remove('nav-open');
+                        }
+                    });
                 });
-
-                startAutoPlay();
             }
         });
     </script>
