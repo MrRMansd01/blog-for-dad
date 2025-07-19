@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عنوان مقاله - دکتر سعادت اله روحانی</title>
+    <style>
+        @font-face {
+            font-family: 'B Nazanin';
+            src: url('fonts/b-nazanin.woff2') format('woff2'),
+                 url('fonts/b-nazanin.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --bg-color: #f4f7f9;
+            --surface-color: #ffffff;
+            --text-color: #34495e;
+            --text-muted: #95a5a6;
+            --border-color: #e5e9ec;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'B Nazanin', 'Vazirmatn', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #2980b9;
+        }
+
+        .main-header {
+            background-color: var(--surface-color);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.8rem;
+        }
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 500;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .main-footer {
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .article-layout {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 3rem;
+        }
+
+        .article-content {
+            background: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .article-header .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        .article-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .article-meta {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+        }
+        .article-body p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        .article-body h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .article-body blockquote {
+            border-right: 4px solid var(--primary-color);
+            padding-right: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        .sidebar .widget {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 100px;
+        }
+        .widget-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .widget ul {
+            list-style: none;
+        }
+        .widget ul li a {
+            display: block;
+            padding: 0.6rem 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        .widget ul li:last-child a {
+            border-bottom: none;
+        }
+        .widget ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar .widget {
+                position: static;
+            }
+        }
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .article-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">دکتر سعادت اله روحانی</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="artical.html" class="active">مقالات</a></li>
+                    <li><a href="index.html#about">درباره و تماس</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="article-layout">
+            <article class="article-content">
+                <header class="article-header">
+                    <img src="https://placehold.co/800x450/a2d2ff/34495e?text=Article+Header" alt="تصویر اصلی مقاله" class="featured-image">
+                    <h1>مدیریت استرس و اضطراب در زندگی مدرن</h1>
+                    <div class="article-meta">
+                        <span>نویسنده: دکتر سعادت اله روحانی</span> | <span>تاریخ انتشار: ۲۸ تیر ۱۴۰۳</span>
+                    </div>
+                </header>
+                <div class="article-body">
+                    <p>استرس و اضطراب به بخش جدایی‌ناپذیر زندگی مدرن تبدیل شده‌اند. فشارهای کاری، مسئولیت‌های خانوادگی و سرعت بالای تغییرات اجتماعی، همگی می‌توانند منجر به فرسودگی روانی و جسمی شوند. اما خبر خوب این است که با یادگیری تکنیک‌های مدیریت استرس، می‌توانیم کنترل زندگی خود را دوباره به دست بگیریم و با آرامش بیشتری به مسیر ادامه دهیم.</p>
+                    
+                    <h2>شناسایی منابع استرس</h2>
+                    <p>اولین قدم برای مدیریت استرس، شناسایی دقیق منابع آن است. آیا استرس شما ناشی از محیط کار است؟ آیا به روابط شخصی شما مربوط می‌شود؟ یا شاید نگرانی‌های مالی دلیل اصلی آن است؟ با نوشتن یک دفترچه یادداشت روزانه، می‌توانید الگوهای استرس‌زا را در زندگی خود پیدا کنید. این کار به شما کمک می‌کند تا بفهمید در چه موقعیت‌هایی بیشتر احساس فشار می‌کنید.</p>
+                    
+                    <blockquote>هیچ‌گاه برای شروع یک تغییر مثبت دیر نیست. کنترل ذهن، اولین قدم برای کنترل زندگی است.</blockquote>
+                    
+                    <h2>تکنیک‌های عملی برای کاهش اضطراب</h2>
+                    <p>پس از شناسایی منابع استرس، نوبت به استفاده از راهکارهای عملی می‌رسد. در ادامه به چند تکنیک موثر اشاره می‌کنیم:</p>
+                    <ul>
+                        <li><strong>تنفس عمیق:</strong> چند دقیقه در روز را به تنفس عمیق و دیافراگمی اختصاص دهید. این کار به آرام شدن سیستم عصبی کمک شایانی می‌کند.</li>
+                        <li><strong>ورزش منظم:</strong> فعالیت بدنی منظم، یکی از بهترین راه‌ها برای آزادسازی اندورفین و کاهش هورمون‌های استرس است.</li>
+                        <li><strong>مدیتیشن و ذهن‌آگاهی:</strong> تمرینات ذهن‌آگاهی به شما کمک می‌کند تا در لحظه حال زندگی کنید و از نگرانی‌های بیهوده درباره گذشته و آینده رها شوید.</li>
+                    </ul>
+                    <p>به یاد داشته باشید که مدیریت استرس یک مهارت است و مانند هر مهارت دیگری، با تمرین و تکرار بهبود می‌یابد. اگر احساس می‌کنید به تنهایی قادر به مدیریت شرایط نیستید، کمک گرفتن از یک متخصص روانشناس یا مشاور می‌تواند بسیار راهگشا باشد.</p>
+                </div>
+            </article>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">آخرین مقالات</h3>
+                    <ul>
+                        <li><a href="#">بهبود روابط عاطفی</a></li>
+                        <li><a href="#">کاربردهای هیپنوتیزم درمانی</a></li>
+                        <li><a href="#">چگونه اعتماد به نفس خود را بسازیم؟</a></li>
+                        <li><a href="#">اصول فرزندپروری آگاهانه</a></li>
+                    </ul>
+                </div>
+                 <div class="widget">
+                    <h3 class="widget-title">دسته‌بندی‌ها</h3>
+                    <ul>
+                        <li><a href="#">روانشناسی فردی</a></li>
+                        <li><a href="#">مشاوره ازدواج</a></li>
+                        <li><a href="#">مدیریت استرس</a></li>
+                        <li><a href="#">هیپنوتیزم درمانی</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+    
+    <footer class="main-footer">
+        <p>&copy; 2025 تمامی حقوق برای وبلاگ دکتر سعادت اله روحانی محفوظ است.</p>
+    </footer>
+</body>
+</html>
